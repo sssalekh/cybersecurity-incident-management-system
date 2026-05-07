@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Incident Details</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="header">
+    <h2>Incident Details</h2>
+    <a href="/dashboard">← Back</a>
+</div>
+
+<div class="container">
+<div class="card-box detail-page">
+<div class="card-box" style="color: black;">
+
+<p><strong>ID:</strong> {{ incident[0] }}</p>
+<p><b>Type:</b> {{ incident[1] }}</p>
+<p><b>Description:</b> {{ incident[2] }}</p>
+<p><b>Severity:</b> {{ incident[3] }}</p>
+<p><b>Status:</b> {{ incident[4] }}</p>
+<p><b>Time:</b> {{ incident[5] }}</p>
+<p><b>Source IP:</b> {{ incident[6] }}</p>
+
+<hr>
+
+<h3>Comments</h3>
+<div style="white-space: pre-line;">
+{{ incident[8] }}
+</div>
+
+{% if session.role == "Security Analyst" %}
+<form method="POST" action="/add_comment/{{ incident[0] }}">
+    <input name="comment" placeholder="Add comment">
+    <button>Add</button>
+</form>
+{% endif %}
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f1f5f9;
+    margin: 0;
+}
+
+.header {
+    background: #0f172a;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container {
+    padding: 20px 30px;
+}
+
+.cards {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.card-box {
+    flex: 1;
+    padding: 15px;
+    border-radius: 10px;
+    color: white;
+}
+
+.high-box { background: #dc2626; }
+.medium-box { background: #f59e0b; }
+.low-box { background: #16a34a; }
+
+.table-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #0f172a;
+    color: white;
+    padding: 10px;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.high { color: red; font-weight: bold; }
+.medium { color: orange; }
+.low { color: green; }
+
+button {
+    padding: 6px 10px;
+    border: none;
+    background: #2563eb;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+.login-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0f172a;
+}
+
+.login-box {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-box button {
+    width: 100%;
+}
+
+.error {
+    color: red;
+    margin-bottom: 10px;
+}
+
+.status-new { color: blue; }
+.status-progress { color: orange; }
+.status-resolved { color: green; }
+.status-closed { color: gray; }
+
+.status-new { color: blue; font-weight: bold; }
+.status-progress { color: orange; font-weight: bold; }
+.status-resolved { color: green; font-weight: bold; }
+.status-closed { color: gray; font-weight: bold; }

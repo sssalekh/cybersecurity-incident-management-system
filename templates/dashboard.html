@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="refresh" content="5">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="header">
+    <div>
+        Role: {{ session.role }}
+        {% if session.role == "Administrator" %}
+            | <a href="/admin" style="color:white;">Admin Panel</a>
+            | <a href="/rules" style="color:white;">Rules</a>
+        {% endif %}
+    </div>
+
+    <h2>Cyber Incident System</h2>
+    <a href="/logout" style="color:white;">Logout</a>
+</div>
+
+<div class="container">
+
+<!-- 📊 STAT CARDS -->
+<div class="cards">
+    <div class="card-box high-box">High: {{ high }}</div>
+    <div class="card-box medium-box">Medium: {{ medium }}</div>
+    <div class="card-box low-box">Low: {{ low }}</div>
+</div>
+
+<!-- 🔍 SEARCH + FILTER -->
+<form method="GET" style="margin-bottom:15px; display:flex; gap:10px;">
+    <input name="q" placeholder="Search..." value="{{ request.args.get('q','') }}">
+
+    <select name="severity">
+        <option value="">All</option>
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+    </select>
+
+    <button>Apply</button>
+</form>
+
+<div class="table-box">
+<table>
+
+<tr>
+<th>ID</th>
+<th>Type</th>
+<th>Description</th>
+<th>Severity</th>
+<th>Status</th>
+<th>Time</th>
+<th>Source IP</th>
+<th>Comments</th>
+<th>Action</th>
+</tr>
+
+{% for i in incidents %}
+<tr>
+
+<td>
+    <a href="/incident/{{ i[0] }}">
+        {{ i[0] }}
+    </a>
+</td>
+<td>{{ i[1] }}</td>
+<td>{{ i[2] }}</td>
+
+<!-- SEVERITY -->
+<td class="
+{% if i[3]=='High' %}high
+{% elif i[3]=='Medium' %}medium
+{% else %}low{% endif %}
+">
+{{ i[3] }}
+</td>
+
+<!-- STATUS -->
+<td class="
+{% if i[4]=='New' %}status-new
+{% elif i[4]=='In Progress' %}status-progress
+{% elif i[4]=='Resolved' %}status-resolved
+{% else %}status-closed{% endif %}
+">
+{{ i[4] }}
+</td>
+
+<!-- TIME -->
+<td>{{ i[5] }}</td>
+
+<!-- SOURCE IP -->
+<td>{{ i[6] }}</td>
+
+<!-- COMMENTS -->
+<td>
+<div style="max-width:200px; white-space:pre-line;">
+{{ i[8] }}
+</div>
+
+{% if session.role == "Security Analyst" %}
+<form method="POST" action="/add_comment/{{ i[0] }}">
+    <input name="comment" placeholder="Add note">
+    <button>Add</button>
+</form>
+{% endif %}
+</td>
+
+<!-- ACTIONS -->
+<td>
+
+{% if session.role == "Security Analyst" %}
+
+    {% if i[4] == "New" %}
+    <a href="/update_status/{{ i[0] }}/In Progress">
+        <button>Start</button>
+    </a>
+    {% endif %}
+
+    {% if i[4] == "In Progress" %}
+    <a href="/update_status/{{ i[0] }}/Resolved">
+        <button>Resolve</button>
+    </a>
+    {% endif %}
+
+    {% if i[4] == "Resolved" %}
+    <a href="/update_status/{{ i[0] }}/Closed">
+        <button>Close</button>
+    </a>
+    {% endif %}
+
+{% else %}
+    -
+{% endif %}
+
+</td>
+
+</tr>
+{% endfor %}
+
+</table>
+</div>
+
+</div>
+
+<script>
+    window.addEventListener("beforeunload", function () {
+        localStorage.setItem("scrollPosition", window.scrollY);
+    });
+
+    window.addEventListener("load", function () {
+        const scrollPosition = localStorage.getItem("scrollPosition");
+        if (scrollPosition !== null) {
+            window.scrollTo(0, scrollPosition);
+        }
+    });
+</script>
+
+</body>
+</html>

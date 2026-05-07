@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="header">
+    <h2>Detection Rules</h2>
+    <a href="/dashboard" style="color:white;">Back</a>
+</div>
+
+<div class="container">
+
+<div class="table-box">
+<table>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+{% for r in rules %}
+<tr>
+<td>{{ r[0] }}</td>
+<td>{{ r[1] }}</td>
+<td>{{ "Enabled" if r[2] else "Disabled" }}</td>
+<td>
+<a href="/toggle_rule/{{ r[0] }}">
+<button>Toggle</button>
+</a>
+</td>
+</tr>
+{% endfor %}
+
+</table>
+</div>
+
+</div>
+
+</body>
+</html>

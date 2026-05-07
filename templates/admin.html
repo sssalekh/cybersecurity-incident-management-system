@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="header">
+    <h2>Admin Panel</h2>
+    <a href="/dashboard" style="color:white;">Back</a>
+</div>
+
+<div class="container">
+
+<div class="card-box" style="background:#2563eb;">
+    <h3>Create User</h3>
+    <form method="POST" action="/add_user">
+        <input name="username" placeholder="Username"><br><br>
+        <input name="password" placeholder="Password"><br><br>
+
+        <select name="role">
+            <option>Security Analyst</option>
+            <option>Administrator</option>
+        </select><br><br>
+
+        <button>Create</button>
+    </form>
+</div>
+
+<br>
+
+<div class="table-box">
+    <h3>Users</h3>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Role</th>
+        </tr>
+
+        {% for u in users %}
+        <tr>
+            <td>{{ u[0] }}</td>
+            <td>{{ u[1] }}</td>
+            <td>{{ u[2] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+
+</div>
+
+</body>
+</html>
