@@ -2,6 +2,7 @@
 
 This project is a web-based Cybersecurity Incident Management System developed using Python and Flask.  
 It simulates security events, detects suspicious activity, and allows users to manage incidents through a web interface.
+This project demonstrates a simplified SIEM-like system for detecting and managing cybersecurity incidents.
 
 ---
 
@@ -107,6 +108,8 @@ http://127.0.0.1:5000
 - The system uses a simulated environment, not a real network
 - Detection rules can be dynamically enabled or disabled
 - The project is developed for educational purposes
+- run_system.py – runs full system (recommended entry point)
+- init_db.py – initializes the database
 
 ---
 
